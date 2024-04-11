@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEMU Job Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #Maroon;
+        }
+        header {
+            background-color: #Maroon;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        nav {
+            background-color: #666;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+        }
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        form input[type="text"],
+        form input[type="submit"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .job-card {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .job-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .job-details {
+            font-size: 16px;
+            color: #666;
+        }
+        .job-details p {
+            margin: 5px 0;
+        }
+        .job-details strong {
+            color: #333;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+   <header>
+        <h1>Job Board</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href= "button data-id"="#">Home</a></li>
+            <li><a href= "button data-id"="#">About</a></li>
+            <li><a href= "button data-id"="#">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <form id="job-form">
+            <input type="text" id="title" placeholder="Job Title" required>
+            <input type="text" id="company" placeholder="Company" required>
+            <input type="text" id="location" placeholder="Location" required>
+            <input type="text" id="type" placeholder="Type" required>
+            <input type="text" id="salary" placeholder="Salary" required>
+            <input type="text" id="posted" placeholder="Posted" required>
+            <input type="submit" value="Add Job Card">
+        </form>
+
+        <div id="job-cards-container"></div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Job Board. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const jobForm = document.getElementById("job-form");
+        const jobContainer = document.getElementById("job-cards-container");
+
+        jobForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById("title").value;
+            const company = document.getElementById("company").value;
+            const location = document.getElementById("location").value;
+            const type = document.getElementById("type").value;
+            const salary = document.getElementById("salary").value;
+            const posted = document.getElementById("posted").value;
+
+            const job = { title, company, location, type, salary, posted };
+            createJobCard(job);
+
+            jobForm.reset();
+        });
+
+        function createJobCard(job) {
+            const card = document.createElement("div");
+            card.classList.add("job-card");
+
+            const title = document.createElement("div");
+            title.classList.add("job-title");
+            title.textContent = job.title;
+
+            const details = document.createElement("div");
+            details.classList.add("job-details");
+            details.innerHTML = `
+                <p><strong>Company:</strong> ${job.company}</p>
+                <p><strong>Location:</strong> ${job.location}</p>
+                <p><strong>Type:</strong> ${job.type}</p>
+                <p><strong>Salary:</strong> ${job.salary}</p>
+                <p><strong>Posted:</strong> ${job.posted}</p>
+            `;
+
+            card.appendChild(title);
+            card.appendChild(details);
+            jobContainer.appendChild(card);
+        }
+    </script>
+</body>
+</html>
+#imagePreview {
+  max-width: 100%;
+  max-height: 400px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
